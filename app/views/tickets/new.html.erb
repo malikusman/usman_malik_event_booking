@@ -1,0 +1,29 @@
+<h1>Book Tickets for <%= @event.name %></h1>
+
+<% if flash[:alert].present? %>
+  <p class="alert"><%= flash[:alert] %></p>
+<% end %>
+
+<%= form_with(model: @ticket, url: event_tickets_path(@event), local: true) do |form| %>
+  <% if @ticket.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@ticket.errors.count, "error") %> prevented this ticket from being booked:</h2>
+      <ul>
+        <% @ticket.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :quantity, "Number of Tickets" %><br>
+    <%= form.number_field :quantity, min: 1 %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Book Tickets" %>
+  </div>
+<% end %>
+
+<%= link_to "Back", event_tickets_path(@event) %>

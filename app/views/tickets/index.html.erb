@@ -1,0 +1,36 @@
+<h1>Tickets for <%= @event.name %></h1>
+
+<p><strong>Event Date:</strong> <%= @event.event_date %> 
+   at <%= @event.event_time.strftime('%H:%M') %></p>
+<p><strong>Location:</strong> <%= @event.location %></p>
+<p><strong>Total Tickets:</strong> <%= @event.total_tickets %></p>
+
+<hr>
+
+<h2>Booked Tickets</h2>
+
+<% if @tickets.any? %>
+  <table>
+    <thead>
+      <tr>
+        <th>User</th>
+        <th>Quantity</th>
+        <th>Booked At</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @tickets.each do |ticket| %>
+        <tr>
+          <td><%= ticket.user.email %></td>
+          <td><%= ticket.quantity %></td>
+          <td><%= ticket.created_at.strftime('%Y-%m-%d %H:%M') %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>No tickets booked yet.</p>
+<% end %>
+
+<%= link_to 'Book Tickets', new_event_ticket_path(@event) %> |
+<%= link_to 'Back to Event', @event %>

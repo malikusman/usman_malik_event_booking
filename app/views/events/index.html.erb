@@ -1,0 +1,17 @@
+<h1>Events</h1>
+
+<% if user_signed_in? %>
+  <%= link_to 'Create New Event', new_event_path %>
+<% else %>
+  <p>Please <%= link_to 'Sign in', new_user_session_path %> or 
+             <%= link_to 'Sign up', new_user_registration_path %> to create events.</p>
+<% end %>
+
+<ul>
+  <% @events.each do |event| %>
+    <li>
+      <%= link_to event.name, event_path(event) %> 
+      (<%= event.event_date %> - <%= event.event_time.strftime('%H:%M') %>)
+    </li>
+  <% end %>
+</ul>
