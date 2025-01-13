@@ -61,9 +61,6 @@ group :development, :test do
 
   # Shoulda Matchers for model/controller specs
   gem 'shoulda-matchers', '~> 5.0'
-
-  # Timecop to freeze or manipulate time in specs
-  gem 'timecop'
 end
 
 group :development do
